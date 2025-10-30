@@ -2,3 +2,4 @@ questa modifica è stata fatta da manuel
 collab.txt
 questo file è una prova di collaborazione
 ognuno di noi può lavorarci dentro
+questa modifica è stata fatta da lisa
