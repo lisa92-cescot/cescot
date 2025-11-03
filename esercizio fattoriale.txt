@@ -1,0 +1,2 @@
+Esercizio
+Scrivere l'algoritmo in pseudocodice che calcola il fattoriale di un numero (n)
