@@ -3,14 +3,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-   <link rel="stylesheet" href="../../styles.css">
+   <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Clienti</h1>
-    <h2>id </h2>
-    <p>nome </p>
-    <p>cognome </p>
-
     <?php
 //inizializza la connessione al database
 $databaseHost = 'localhost';
@@ -33,10 +29,11 @@ echo $result->num_rows . '<br>';
 
 //ciclo sulle righe restituite e stampo nome e cognome di ogni cliente
 while ($row = mysqli_fetch_assoc($result)) {
-	echo "div class = 'cliente'>";
+    echo "<div>";
     echo "<h2>" . $row['id'] . "</h2>";
     echo "<p>" . $row['nome'] . "</p>";
     echo "<p>" . $row['cognome'] . "</p>";
+    echo "</div>";
 }
 ?>
 </body>
