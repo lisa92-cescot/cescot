@@ -6,10 +6,11 @@
 </head>
 <body>
     <h1>Il testo che segue arriva dal database</h1>
-    <div><?php
+    <div>
+    <?php
 //inizializza la connessione al database
 $databaseHost = 'localhost';
-$databaseName = 'prenotazioni';
+$databaseName = 'cescot';
 $databaseUsername = 'root';
 $databasePassword = '';
 
@@ -19,9 +20,7 @@ $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $d
 if (!$mysqli) {
 	die("Connection failed: " . mysqli_connect_error());
 }
-
-//esegui una query di esempio
-$query = 'SELECT * FROM clienti';
+$query = 'SELECT * FROM content';
 
 $result = mysqli_query($mysqli, $query);
 
@@ -30,8 +29,10 @@ echo $result->num_rows . '<br>';
 
 //ciclo sulle righe restituite e stampo nome e cognome di ogni cliente
 while ($row = mysqli_fetch_assoc($result)) {
-	echo 'Nome: ' . $row['nome'] . ', Cognome: ' . $row['cognome'] . '<br>';
-}</div>
+	echo $row['value'].'<br>';
+}
+?>
+</div>
     
 </body>
 </html>
