@@ -8,9 +8,9 @@
 <body>
     <h1>Clienti</h1>
     <h2>id </h2>
-    <p>Nome </p>
-    <p>Cognome </p>
-    
+    <p>nome </p>
+    <p>cognome </p>
+
     <?php
 //inizializza la connessione al database
 $databaseHost = 'localhost';
@@ -24,7 +24,7 @@ $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $d
 if (!$mysqli) {
 	die("Connection failed: " . mysqli_connect_error());
 }
-$query = 'SELECT * FROM content';
+$query = 'SELECT * FROM clienti';
 
 $result = mysqli_query($mysqli, $query);
 
@@ -33,7 +33,10 @@ echo $result->num_rows . '<br>';
 
 //ciclo sulle righe restituite e stampo nome e cognome di ogni cliente
 while ($row = mysqli_fetch_assoc($result)) {
-	echo $row['clienti'].'<br>';
+	echo "div class = 'cliente'>";
+    echo "<h2>" . $row['id'] . "</h2>";
+    echo "<p>" . $row['nome'] . "</p>";
+    echo "<p>" . $row['cognome'] . "</p>";
 }
 ?>
 </body>
