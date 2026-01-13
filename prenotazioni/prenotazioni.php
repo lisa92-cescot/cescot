@@ -1,50 +1,41 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-     <h1>Prenotazioni</h1>
-    <div>
-    <?php
-//inizializza la connessione al database
-$databaseHost = 'localhost';
-$databaseName = 'prenotazioni';
-$databaseUsername = 'root';
-$databasePassword = '';
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link ref="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Prenotazioni</h1>
+        <?php
+            require_once("../../../php/esercizi/lib/libreria.php");
+            //inizializza la connessione al database
+            $databaseHost = '127.0.0.1';
+            $databaseName = 'prenotazioni';
+            $databaseUsername = 'root';
+            $databasePassword = '';
+            $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName);
 
-$mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName);
+            //verifica la connessione
+            if (!$mysqli) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
 
-//verifica la connessione
-if (!$mysqli) {
-	die("Connection failed: " . mysqli_connect_error());
-}
-$query = 'SELECT * FROM clienti, prenotazioni.prenotazioni';
+            $query = 'SELECT citta.citta, clienti.nome, clienti.cognome, prenotazioni.arrivo, prenotazioni.importo, prenotazioni.caparra,  ROUND(prenotazioni.importo - prenotazioni.caparra, 2) AS saldo
+                      FROM citta
+                      INNER JOIN clienti ON citta.id_citta = clienti.citta
+                      INNER JOIN prenotazioni ON clienti.id_cliente = prenotazioni.cliente';
 
-$result = mysqli_query($mysqli, $query);
+            $result = mysqli_query($mysqli, $query);
 
-//stampa il numero di righe restituite
-echo $result->num_rows . '<br>';
-
-//ciclo sulle righe restituite e stampo nome e cognome di ogni cliente
-while ($row = mysqli_fetch_assoc($result)) {
-    echo "<div>";
-    echo "<h2>". $row['data di arrivo'] . "</h2>";
-    echo "<p>" . $row['id'] . "</p>";
-    echo "<p>" . $row['nome'] . "</p>";
-    echo "<p>" . $row['cognome'] . "</p>";
-    echo "<p>" . $row['citta di residenza'] . "</p>";
-    echo "<p>" . $row['importo della prenotazione'] . "</p>";
-    echo "<p>" . $row['caparra'] . "</p>";
-    echo "<p class='saldo'>" . $row['saldo'] . "</p>";
-    echo "</div>";
-    
-}
-?>
-    
-</body>
-</html>
-</body>
+            while ($row = mysqli_fetch_assoc($result)) {
+                $prenotazioneDivContent = 
+                        "<h2>$row[arrivo]</h2>
+                        <p>Nome: $row[nome] Cognome: $row[cognome]</p>
+                        <p>Città di residenza: $row[citta]</p>
+                        <p>Importo: $row[importo]</p>
+                        <p>Caparra: $row[caparra]</p>
+                        <p>Saldo: $row[saldo]";
+                        printDiv($prenotazioneDivContent, 'prenotazione');
+            }
+            ?>
+    </body>
 </html>

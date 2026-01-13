@@ -8,5 +8,12 @@ h2 {
 }
 p.saldo{
     font-weight: bold;
+}
+
+div.prenotazione{
+    border: 2px solid black;
+    margin: 5px;
+    padding: 5px;
+    max-width: 200px;
 
 }
