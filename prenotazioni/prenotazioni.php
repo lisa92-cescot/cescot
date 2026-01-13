@@ -21,7 +21,7 @@ $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $d
 if (!$mysqli) {
 	die("Connection failed: " . mysqli_connect_error());
 }
-$query = 'SELECT * FROM clienti.prenotazioni';
+$query = 'SELECT * FROM clienti, prenotazioni.prenotazioni';
 
 $result = mysqli_query($mysqli, $query);
 
@@ -31,13 +31,14 @@ echo $result->num_rows . '<br>';
 //ciclo sulle righe restituite e stampo nome e cognome di ogni cliente
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<div>";
-    echo "<h2>" . $row['id'] . "</h2>";
-    echo "<h2>" . $row['nome'] . "</h2>";
-    echo "<h2>" . $row['cognome'] . "</h2>";
-    echo "<h2>" . $row['citta di residenza'] . "</h2>";
-    echo "<h2>" . $row['importo della prenotazione'] . "</h2>";
-    echo "<h2>" . $row['caparra'] . "</h2>";
-    echo "<h2 class='saldo'>" . $row['saldo'] . "</h2>";
+    echo "<h2>". $row['data di arrivo'] . "</h2>";
+    echo "<p>" . $row['id'] . "</p>";
+    echo "<p>" . $row['nome'] . "</p>";
+    echo "<p>" . $row['cognome'] . "</p>";
+    echo "<p>" . $row['citta di residenza'] . "</p>";
+    echo "<p>" . $row['importo della prenotazione'] . "</p>";
+    echo "<p>" . $row['caparra'] . "</p>";
+    echo "<p class='saldo'>" . $row['saldo'] . "</p>";
     echo "</div>";
     
 }
