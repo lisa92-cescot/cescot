@@ -8,11 +8,15 @@
         <?php
             require_once("../lib/library.php");
             //inizializza la connessione al database
-            $databaseHost = '127.0.0.1';
-            $databaseName = 'prenotazioni';
-            $databaseUsername = 'root';
-            $databasePassword = '';
-            $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName);
+           
+            $mysqli = new mysqli(
+                getenv('DB_HOST'),
+                getenv('DB_USER'),
+                getenv('DB_PASS'),
+                getenv('DB_NAME')
+            );
+
+            $email= filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
             //verifica la connessione
             if (!$mysqli) {
