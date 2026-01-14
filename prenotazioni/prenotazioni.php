@@ -6,7 +6,7 @@
     <body>
         <h1>Prenotazioni</h1>
         <?php
-            require_once("../../../php/esercizi/lib/libreria.php");
+            require_once("../lib/library.php");
             //inizializza la connessione al database
             $databaseHost = '127.0.0.1';
             $databaseName = 'prenotazioni';
